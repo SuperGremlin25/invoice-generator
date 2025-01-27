@@ -38,7 +38,6 @@ A Python-based desktop application for creating professional invoices with a use
 6. Toggle themes using the **Toggle Dark/Light** button.
 
 ## 📝 Notes
-- **Logo Support**: To add a company logo, modify the `generate_pdf()` function and include an `Image` object from ReportLab.
 - **OS Compatibility**: The `os.startfile()` call works on Windows. For Linux/macOS, manually open the generated PDF.
 ## 📜 License
 Open-source under the [MIT License](LICENSE).
