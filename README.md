@@ -2,7 +2,6 @@
 
 A professional desktop application for creating and managing invoices with a modern user interface. This premium version generates polished PDF invoices, supports company branding, and includes enhanced features for exporting, emailing, and future CRM integration.
 
-![Screenshot](screenshot1.png)
 
 ---
 
