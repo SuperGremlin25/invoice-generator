@@ -6,6 +6,8 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog, simpledialog
+import shutil
+from mac_compatibility import get_config_path, get_app_path, set_ui_style
 from tkcalendar import DateEntry
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
@@ -45,17 +47,33 @@ DEFAULT_CONFIG = {
 
 # ---------------------------- Helper Functions ----------------------------
 def load_config():
+    config_path = get_config_path()
+    # If config doesn't exist, copy the default one.
+    if not os.path.exists(config_path):
+        try:
+            default_config_path = os.path.join(get_app_path(), 'config.json')
+            if os.path.exists(default_config_path):
+                shutil.copy(default_config_path, config_path)
+            else:
+                # If default is missing, create a blank one to avoid crashing
+                with open(config_path, 'w') as f:
+                    json.dump(DEFAULT_CONFIG.copy(), f, indent=4)
+        except Exception as e:
+            messagebox.showerror("Configuration Error", f"Could not create user configuration file: {e}")
+
+    # Now, load the config from the user-specific path
     try:
-        if os.path.exists("config.json"):
-            with open("config.json", "r") as f:
-                loaded_config = json.load(f)
-                # Ensure all default keys exist
-                return {**DEFAULT_CONFIG, **loaded_config}
+        with open(config_path, "r") as f:
+            loaded_config = json.load(f)
+            # Ensure all default keys exist
+            return {**DEFAULT_CONFIG, **loaded_config}
     except Exception as e:
         print(f"Error loading config: {e}")
-    return DEFAULT_CONFIG.copy()
+        # If loading fails, return default config to prevent crash
+        return DEFAULT_CONFIG.copy()
 
 def save_config():
+    config_path = get_config_path()
     try:
         # Update the global config dictionary
         config.update({
@@ -71,7 +89,7 @@ def save_config():
             "logo_path": config.get("logo_path", "")
         })
         
-        with open("config.json", "w") as f:
+        with open(config_path, "w") as f:
             json.dump(config, f, indent=4)
         
         # Update UI elements that depend on config

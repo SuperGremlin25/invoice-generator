@@ -1,0 +1,26 @@
+MIT License
+
+Copyright (c) 2025 Digital Insurgent Media
+
+Permission is hereby granted, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+INVOICE GENERATOR PREMIUM - END USER LICENSE AGREEMENT
+
+1. GRANT OF LICENSE
+This is a license agreement between you (either an individual or a single entity) and Digital Insurgent Media for the Invoice Generator Premium software product.
+
+2. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS
+You may not reverse engineer, decompile, or disassemble the Software, except and only to the extent that such activity is expressly permitted by applicable law.
+
+3. COPYRIGHT
+All title and copyrights in and to the Software and any copies of the Software are owned by Digital Insurgent Media.
+
+4. NO WARRANTIES
+Digital Insurgent Media expressly disclaims any warranty for the Software. The Software is provided 'As Is' without any express or implied warranty of any kind.
+
+5. LIMITATION OF LIABILITY
+In no event shall Digital Insurgent Media be liable for any damages (including, without limitation, lost profits, business interruption, or lost information) arising out of the use of or inability to use the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

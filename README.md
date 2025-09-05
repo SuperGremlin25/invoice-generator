@@ -60,9 +60,52 @@ A professional desktop application for creating and managing invoices with a mod
 
 ## 📦 Packaging
 
-To create a standalone executable for Windows, you can use one of the provided build scripts.
+### Commercial Distribution
 
-### Option 1: PowerShell Script (Recommended)
+For commercial distribution, use the dedicated build scripts located in the `commercial_distribution` directory. These scripts create packages that store user configurations in the appropriate system-wide application data folders, ensuring a clean and professional user experience.
+
+#### Windows Commercial Build
+
+Use the PowerShell script in the `commercial_distribution` folder:
+
+```powershell
+# Navigate to the commercial distribution directory
+cd commercial_distribution
+
+# Run the build script
+powershell -ExecutionPolicy Bypass -File .\build_commercial_windows.ps1
+```
+
+This will generate a zipped package named `InvoiceGeneratorPremium_Windows_Commercial.zip` containing the executable and all necessary files.
+
+#### macOS Commercial Build
+
+Use the shell script in the `commercial_distribution` folder:
+
+```bash
+# Navigate to the commercial distribution directory
+cd commercial_distribution
+
+# Make the script executable
+chmod +x build_commercial_mac.sh
+
+# Run the build script
+./build_commercial_mac.sh
+```
+
+This will generate a zipped package named `InvoiceGeneratorPremium_macOS_Commercial.zip` containing the `.app` bundle and other files.
+
+---
+
+### Development Builds
+
+You can create standalone executables for both Windows and macOS for development purposes.
+
+You can create standalone executables for both Windows and macOS.
+
+### Windows Build
+
+#### Option 1: PowerShell Script (Recommended)
 
 Use the included PowerShell script which creates a clean build with a timestamped filename:
 
@@ -75,7 +118,7 @@ This script will:
 - Build the executable with a unique timestamped name
 - Place the final executable in the `dist_new` folder
 
-### Option 2: Manual PyInstaller Command
+#### Option 2: Manual PyInstaller Command
 
 1. **Install PyInstaller**:
    ```bash
@@ -87,7 +130,55 @@ This script will:
    pyinstaller --onefile --windowed --name "InvoiceGeneratorPremium" invoice.py
    ```
 
-3. **Find the executable** in the `dist` folder that PyInstaller creates.
+### macOS Build
+
+#### Option 1: Shell Script (Recommended)
+
+Use the included shell script to create a macOS application:
+
+```bash
+# Make the script executable
+chmod +x build_mac.sh
+
+# Run the build script
+./build_mac.sh
+```
+
+This script will:
+- Create a clean build environment
+- Build the application with a unique timestamped name
+- Place the final executable in the `dist_mac` folder
+
+#### Option 2: Manual PyInstaller Command
+
+1. **Install PyInstaller**:
+   ```bash
+   pip3 install pyinstaller
+   ```
+
+2. **Run the build command**:
+   ```bash
+   python3 -m PyInstaller --windowed --onefile --name "InvoiceGeneratorPremium" invoice.py
+   ```
+
+3. **Make the executable runnable**:
+   ```bash
+   chmod +x dist/InvoiceGeneratorPremium
+   ```
+
+### Creating a proper macOS .app bundle
+
+For a more native macOS experience, you can convert the executable into a proper .app bundle using [Platypus](https://sveinbjorn.org/platypus):
+
+1. **Install Platypus**:
+   ```bash
+   brew install platypus
+   ```
+
+2. **Create the .app bundle**:
+   ```bash
+   platypus -a 'Invoice Generator Premium' -o 'Text' -I 'com.digitalinsurgent.invoicegenerator' -f dist_mac/InvoiceGeneratorPremium -i app_icon.png -y dist_mac/InvoiceGeneratorPremium.app
+   ```
 
 ## 📜 License
 
