@@ -169,3 +169,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Project specific
+config.json
+releases/
+test_commercial_build/
+build_commercial/
+dist_commercial/
+*.zip

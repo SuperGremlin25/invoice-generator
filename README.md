@@ -1,61 +1,125 @@
 # Invoice Generator Premium
 
-A professional desktop application for creating and managing invoices with a modern user interface. This premium version generates polished PDF invoices, supports company branding, and includes enhanced features for exporting, emailing, and future CRM integration.
+A professional desktop application for creating and managing invoices with a modern user interface. This premium version generates polished PDF invoices, supports company branding, and includes enhanced features for exporting and emailing.
+
+![Invoice Generator Premium](screenshot1.png)
 
 
 ---
 
 ## 🚀 Features
 
-- **Premium UI**: Modern interface with professional styling and premium color theme.
-- **Tabbed Interface**: Clean, organized UI with tabs for invoice creation, reports, contacts, and settings.
-- **Professional Invoices**: Generate polished PDF invoices with your company's branding.
-- **Real-time Totals**: View subtotal, tax, and total calculations directly in the interface.
-- **Company Settings**: Save your company details (name, address, logo, etc.) to a `config.json` file for easy reuse.
-- **Logo Upload**: Easily upload and display your company logo on invoices.
-- **Dynamic Item Management**: Add or remove invoice items on the fly.
-- **Automatic Calculations**: Instantly calculates subtotals, taxes, and totals.
-- **Export to Excel/CSV**: Export invoice data for accounting and analysis.
-- **Email Invoices**: Send PDF invoices directly from the application (requires SMTP configuration).
-- **Future Premium Features**: Placeholder tabs for CRM and reporting functionality (coming soon).
+- **Professional Invoicing**: Create and manage invoices with a clean, intuitive interface
+- **Brand Customization**: Add your company logo and details for a professional look
+- **PDF Generation**: Export invoices as polished PDF documents
+- **Data Export**: Save invoice data as Excel or CSV files
+- **Email Integration**: Send invoices directly from the application
+- **Cross-Platform**: Available for both Windows and macOS
+- **User-Specific Settings**: Each user gets their own configuration
+- **Clean Data Separation**: No residual data from development or testing
 
-## 🛠️ Setup
+## 📦 Commercial Distribution
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/your-username/GUI-Invoice-Generator.git
-    cd GUI-Invoice-Generator
-    ```
+This project includes build scripts to create professional, self-contained packages for both Windows and macOS. The commercial versions store user data in the appropriate system directories and include all necessary dependencies.
 
-2.  **Create a virtual environment** (recommended):
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+### Building for Windows
 
-3.  **Install dependencies** from `requirements.txt`:
-    ```bash
-    pip install -r requirements.txt
-    ```
+1. Navigate to the `commercial_distribution` directory:
+   ```powershell
+   cd commercial_distribution
+   ```
+
+2. Run the build script:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\build_commercial_windows.ps1
+   ```
+
+3. Find the packaged application in `commercial_distribution/InvoiceGeneratorPremium_Windows_Commercial.zip`
+
+### Building for macOS
+
+1. Navigate to the `commercial_distribution` directory:
+   ```bash
+   cd commercial_distribution
+   ```
+
+2. Make the build script executable:
+   ```bash
+   chmod +x build_commercial_mac.sh
+   ```
+
+3. Run the build script:
+   ```bash
+   ./build_commercial_mac.sh
+   ```
+
+4. Find the packaged application in `commercial_distribution/InvoiceGeneratorPremium_macOS_Commercial.zip`
+
+## 📝 Usage
+
+1. **First Run**: The application will create a default configuration file in the appropriate system directory
+2. **Configure Your Company**: Go to Settings and enter your company details
+3. **Create Invoices**: Use the Invoice tab to create and manage your invoices
+4. **Export/Email**: Save invoices as PDF or email them directly to clients
+
+## 📦 Distribution
+
+The commercial build scripts create self-contained packages that:
+- Include all necessary dependencies
+- Store user data in the correct system directories
+- Are ready for immediate distribution
+- Maintain a clean separation between application and user data
+
+## 📜 License
+
+Commercial use requires proper licensing. Please contact the developer for licensing information.
+
+---
+*Invoice Generator Premium © 2025 - Professional Edition*
+
+## 🛠️ Development & Release
+
+### Development Requirements
+- Python 3.7+
+- Required packages (see `requirements.txt`)
+- PyInstaller for building distributions
+
+### Creating a Release Package
+
+1. Run the release script:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\create_release.ps1
+   ```
+2. Find the release package in the `releases` directory
+3. The package includes:
+   - Source code
+   - Build scripts
+   - Documentation
+   - License information
+
+### Versioning
+
+Releases follow semantic versioning (MAJOR.MINOR.PATCH):
+- MAJOR: Incompatible API changes
+- MINOR: Backward-compatible functionality
+- PATCH: Backward-compatible bug fixes
 
 ## 🚀 Usage
 
-1.  **Run the application**:
-    ```bash
-    python invoice.py
-    ```
-
-2.  **Configure Company Settings**:
-    - Go to the **Company Settings** tab.
-    - Fill in your company's details and upload a logo.
-    - Click **Save Settings**. Your details will be saved to `config.json` and automatically loaded next time.
-
-3.  **Create an Invoice**:
-    - In the **Create Invoice** tab, fill in the customer's name, invoice number, and date.
-    - Add items with their quantity and price.
-    - Click **Generate PDF** to create the invoice.
-    - Use **Export to Excel/CSV** to save the data in a spreadsheet.
-    - Click **Email Invoice** to send the PDF as an attachment. You will be prompted for recipient details and your SMTP credentials.
+1. **First Run**: The application will create a default configuration file in the appropriate system directory
+2. **Configure Your Company**:
+   - Go to the **Settings** tab
+   - Enter your company details
+   - Upload your company logo (optional)
+   - Configure email settings if you want to send invoices directly from the app
+3. **Create Invoices**:
+   - Go to the **Invoice** tab
+   - Fill in customer details
+   - Add line items with descriptions, quantities, and prices
+   - Click "Generate PDF" to save or print the invoice
+4. **Export Data**:
+   - Use the export options to save invoice data as Excel or CSV
+   - Email invoices directly to clients (requires SMTP configuration in Settings)
 
 ## 📦 Packaging
 

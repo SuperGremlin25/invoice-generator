@@ -23,7 +23,6 @@ pyinstaller --name "$APP_NAME" \
     --icon "$ICON_FILE" \
     --distpath "$DIST_PATH" \
     --workpath "$BUILD_PATH" \
-    --add-data "../config.json:." \
     --add-data "../invoice_icon.icns:." \
     "$SCRIPT_FILE"
 

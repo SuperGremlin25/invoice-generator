@@ -48,31 +48,39 @@ DEFAULT_CONFIG = {
 # ---------------------------- Helper Functions ----------------------------
 def load_config():
     config_path = get_config_path()
-    # If config doesn't exist, copy the default one.
-    if not os.path.exists(config_path):
+    # Ensure the parent directory exists
+    os.makedirs(os.path.dirname(config_path), exist_ok=True)
+
+    if os.path.exists(config_path):
         try:
-            default_config_path = os.path.join(get_app_path(), 'config.json')
-            if os.path.exists(default_config_path):
-                shutil.copy(default_config_path, config_path)
-            else:
-                # If default is missing, create a blank one to avoid crashing
-                with open(config_path, 'w') as f:
-                    json.dump(DEFAULT_CONFIG.copy(), f, indent=4)
-        except Exception as e:
-            messagebox.showerror("Configuration Error", f"Could not create user configuration file: {e}")
+            with open(config_path, 'r') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            # If file is corrupted or unreadable, it will be overwritten by a default one
+            pass
 
-    # Now, load the config from the user-specific path
-    try:
-        with open(config_path, "r") as f:
-            loaded_config = json.load(f)
-            # Ensure all default keys exist
-            return {**DEFAULT_CONFIG, **loaded_config}
-    except Exception as e:
-        print(f"Error loading config: {e}")
-        # If loading fails, return default config to prevent crash
-        return DEFAULT_CONFIG.copy()
+    # Create and return a default config if it doesn't exist or was invalid
+    default_config = {
+        "company_name": "",
+        "address": "",
+        "city": "",
+        "country": "",
+        "phone": "",
+        "email": "",
+        "website": "",
+        "tax_id": "",
+        "currency": "USD",
+        "logo_path": "",
+        "smtp_server": "",
+        "smtp_port": "587",
+        "smtp_user": "",
+        "smtp_password": ""
+    }
+    with open(config_path, 'w') as f:
+        json.dump(default_config, f, indent=4)
+    return default_config
 
-def save_config():
+def save_config(show_message=True):
     config_path = get_config_path()
     try:
         # Update the global config dictionary
@@ -85,17 +93,24 @@ def save_config():
             "email": email_var.get(),
             "website": website_var.get(),
             "tax_id": tax_id_var.get(),
-            "currency": currency_var.get() or "USD",  # Ensure USD is used if not set
-            "logo_path": config.get("logo_path", "")
+            "currency": currency_var.get(),
+            "logo_path": logo_image_path,
+            "smtp_server": smtp_server_var.get(),
+            "smtp_port": smtp_port_var.get(),
+            "smtp_user": smtp_user_var.get(),
+            "smtp_password": smtp_password_var.get(),
         })
-        
-        with open(config_path, "w") as f:
+
+        # Write the updated config to the file
+        with open(config_path, 'w') as f:
             json.dump(config, f, indent=4)
-        
-        # Update UI elements that depend on config
-        update_items_table()
-        
-        messagebox.showinfo("Success", "Company settings saved successfully!")
+
+        if show_message:
+            messagebox.showinfo("Success", "Settings saved successfully!")
+
+        # Update the price label in the invoice tab
+        price_label.config(text=f"Price ({config.get('currency', 'USD')}):")
+
     except Exception as e:
         messagebox.showerror("Error", f"Failed to save settings: {e}")
 
@@ -491,7 +506,6 @@ def update_items_table():
     tax_label.config(text=f"{currency} {tax_amount:.2f}")
     total_label.config(text=f"{currency} {total:.2f}")
 
-
 def load_logo(image_path, size=(150, 80)):
     """Load and resize logo image"""
     if not os.path.exists(image_path):
@@ -536,6 +550,21 @@ def remove_item():
         items.pop()
         update_items_table()
 
+def clear_logo():
+    """Clears the logo path from the config and UI."""
+    global config, logo_image_path, logo_label
+    
+    logo_image_path = ""
+    config['logo_path'] = ''
+    
+    # Clear the UI
+    logo_label.config(image=None)
+    logo_label.image = None
+    
+    # Save the change immediately
+    save_config()
+    messagebox.showinfo("Success", "Logo has been cleared.")
+
 # Create main window and notebook tabs
 root = tk.Tk()
 root.title("Invoice Generator - Premium Edition")
@@ -576,8 +605,8 @@ contacts_tab = ttk.Frame(nb)  # Premium feature tab
 # Add tabs to notebook
 nb.add(invoice_tab, text="Invoice")
 nb.add(settings_tab, text="Settings")
-nb.add(reports_tab, text="Reports ⭐")
-nb.add(contacts_tab, text="Contacts ⭐")
+nb.add(reports_tab, text="Reports ")
+nb.add(contacts_tab, text="Contacts ")
 
 # Add premium feature notices to premium tabs
 ttk.Label(

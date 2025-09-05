@@ -23,7 +23,6 @@ pyinstaller --name $AppName `
     --windowed `
     --distpath $DistPath `
     --workpath $BuildPath `
-    --add-data "..\config.json;." `
     $ScriptFile
 
 # 4. Check if build was successful
